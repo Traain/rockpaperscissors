@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title> Rock, Paper, Scissors </title>
+</head>
+<body>
+<script>
+
+let playerPoints = 0;
+let computerPoints = 0;
+
+function computerPlay (){
+    let x = Math.floor(Math.random() * 3);
+    if (x == 0) {
+        return "Rock";
+    } else if (x == 1) {
+        return "Paper";
+    } else {
+        return "Scissors";
+    }
+}
+
+function findCapital(playerSelection) {
+    return playerSelection.charAt(0).toUpperCase() + playerSelection.slice(1).toLowerCase();
+}
+
+function playRound(playerSelection, computerSelection) {
+	let playerCapital = findCapital(playerSelection);
+    console.log(playerCapital);
+    if ((computerSelection.localeCompare(playerCapital) == 0)) {
+        return "Tie.";
+    } else if ((playerCapital.localeCompare("Rock") == 0 && (computerSelection.localeCompare("Scissors") == 0)) || (playerCapital.localeCompare("Paper") == 0 && (computerSelection.localeCompare("Rock") == 0)) || (playerCapital.localeCompare("Scissors") == 0 && (computerSelection.localeCompare("Paper") == 0))) {
+        playerPoints++;
+        return "You win! " + playerCapital + " beats " + computerSelection + ".";
+    } else {
+        computerPoints++;
+        return "You lose. " + computerSelection + " beats " + playerCapital + ".";
+    }
+}
+
+function game() {
+    for (i = 0; i < 50; i++) {
+        playerSelection = prompt("Rock, paper, or scissors?");
+        let computerSelection = computerPlay();
+        console.log(playRound(playerSelection, computerSelection));
+        console.log("Player points: " + playerPoints + " Computer points: " + computerPoints);
+        if (playerPoints == 3) {
+            console.log("Game won!")
+            return;
+        } else if (computerPoints == 3) {
+            console.log("Game lost...");
+            return;
+        }
+    }
+    return;
+}
+
+game();
+
+
+</script>
+</body>
+</html>
